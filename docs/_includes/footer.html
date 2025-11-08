@@ -20,11 +20,15 @@
     {% assign contact_email = site.email | default: site.github.owner_email %}
 
     Copyright&copy; {{ years }}
-    <a href="https://n2vlv.net" class="link-secondary text-decoration-none">
+    {% if page.url != "/" and page.path != "index.html" %}
+      <a href="https://n2vlv.net" target="_blank" class="link-secondary text-decoration-none">
+    {% endif %}
       {{ site.author | default: site.github.owner_name }}
-    </a>
-    <a href="mailto:{{ contact_email }}" class="link-secondary text-decoration-none">
-      {{ contact_email }}
-    </a>
+    {% if page.url != "/" and page.path != "index.html" %}
+      </a>
+    {% endif %}
+      <a href="mailto:{{ contact_email }}" class="link-secondary text-decoration-none">
+	{{ contact_email }}
+      </a>
   </div>
 </footer>
