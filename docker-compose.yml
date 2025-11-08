@@ -1,0 +1,10 @@
+---
+services:
+  web:
+    build: build
+    volumes:
+      - ./docs:/src/site
+    ports:
+      - "4000:4000"
+    container_name: n2vlv
+...

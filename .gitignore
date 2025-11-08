@@ -1,0 +1,7 @@
+#*
+*.new
+*~
+.DS_Store
+_dl/
+docs/_site/
+
