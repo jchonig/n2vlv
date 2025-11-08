@@ -1,0 +1,30 @@
+<footer class="bg-light border-top py-3 mt-5 fixed-bottom">
+  <div class="container text-center text-muted small">
+    {% if site.github and site.github.repository and site.github.repository.created_at %}
+      {% assign first_year = site.github.repository.created_at | date: "%Y" %}
+    {% else %}
+      {% assign first_year = site.time | date: "%Y" %}
+    {% endif %}
+    {% assign this_year = site.time | date: "%Y" %}
+
+    {% if first_year == blank or first_year == "" %}
+      {% assign first_year = this_year %}
+    {% endif %}
+
+    {% if first_year == this_year %}
+      {% assign years = this_year %}
+    {% else %}
+      {% assign years = first_year | append: "-" | append: this_year %}
+    {% endif %}
+
+    {% assign contact_email = site.email | default: site.github.owner_email %}
+
+    Copyright&copy; {{ years }}
+    <a href="https://n2vlv.net" class="link-secondary text-decoration-none">
+      {{ site.author | default: site.github.owner_name }}
+    </a>
+    <a href="mailto:{{ contact_email }}" class="link-secondary text-decoration-none">
+      {{ contact_email }}
+    </a>
+  </div>
+</footer>
