@@ -1,0 +1,144 @@
+---
+- Title: Net Check-in
+  Description: |
+    [Net Check-in](net_checkin.html){:target="_blank" rel="noopener"} is a stand-alone web page that
+    lets you record net check-ins with QRZ lookups.
+    
+- Title: VGC VR-N7500
+  Background: index_header.jpg
+  Description: |
+    ## My First Radio
+    Well, technically my first radio was a QuanSheng UV-K6 (aka QuanSheng UV-K5(8)) which is a $30 UHF/VHF HT.  But that's another story.
+
+    While looking at radios I was intrigued by the Vero/VGC VR-N76 HT
+    which has a plethora of digital capabilities and can be fully app
+    controlled.  Then I learned about the VR-N7500 which is a headless
+    50W mobile with full control from an Android App via Bluetooth.
+    There were some pointers to the BHM-78 which looks like a HT, but
+    is just a Bluetooth remote for the radio.  But they don't make
+    them anymore.
+
+    Then I found someone near Buffallo on Facebook Marketplace that
+    had both a BHM-78 and an N7500 for sale.  Unfortunately for my
+    patience, shipping was much cheaper than a 480 mile drive.
+
+    I plugged the radio into a 12V power supply and connected the HT
+    app and the first thing it did was ask if I wanted to update the
+    Firmware.  Of course I did.
+
+    Then I paired the BHM-78 and started playing around.
+
+    ## Audio
+
+    There are many ways to send and receive on the radio
+
+    The optional wired handset
+      + An external speaker (receive only)
+      + Via the HT app through the phone (and then out to other BT devices)
+      + Via the BHM-78 handset
+      + Directly connected BT headsets
+
+    THe VGC handsets have PTT buttons. Via the phone you need to hold a button on the phone.  There is a Bluetooth PTT switch that you can wear like a ring.
+
+    The BHM-78 will also connect to a phone for audio.
+
+    ## SSTV
+
+    KD2EAT recommended I try receiving an SSTV signal in preparation
+    for receiving a balloon launch on August 13.  I spent a lot of
+    time searching the web to figure out how to do it.  Do I need to
+    install Robot36?  Another App?  Then I read something that said
+    the HT app will just decode the signal if you go into the Messages
+    tab.  So KD2EAT keyed up his base and sent a picture.
+
+    At first we were talking on the phone via the car Speakerphone and
+    the HT app was picking up the audio which distorted the signal.
+
+    It's also necessary to turn off APRS while receiving SSTV as it
+    can interfere with the decoding of the image.
+
+    ![HT App Messages Screen](images/n7500_sstv.png){: width="50%" height="auto"}
+
+
+    ## App Control
+    
+    The HT app works fine from my Pixel 9 Pro.  I tried running the
+    Android App on an x86 and ARM ChromeBook, but it was unable to
+    connect to the radio.  I guess I need an Android Tablet in the
+    vehicle for dedicated control of the radio....
+
+    ## Installation
+
+    I purchased a used Android tablet (Samsung Galaxy Tab A9+) and a
+    DCHouse 12V 100AH LiFePo4 trolling motor battery to avoid putting
+    a strain on my car battery.  The battery can charge via a LiOn
+    charger, via a DC port, or via USB-C (at 60W).
+
+    ![Mobile battery](images/mobile_battery.jpg){: width="50%" height="auto" }
+
+    I tested this installation by listening in on a few TCARA Sunday
+    Night Nets and having a conversation with Mike (KD2EAT) over the
+    hill into Trumansburg.  This was primarily using Bluetooth to the
+    car Speakerphone.
+
+    ![HT App on tablet](images/ht_tablet.jpg){: width="75%" height="auto" }
+
+- Title: My Journey to a Ham Radio License
+  Description: |
+    When I was in Junior High School we visited a family friend
+    who was an amateur radio operator.  I was intrigued by
+    his ham shack.  He ended up giving me a Hallicrafters
+    short wave receiver.
+
+    Back at school I would carry around the
+    [AARL](https://www.arrl.org){:target="_blank" rel="noopener"} [Handbook](https://www.arrl.org/arrl-handbook-2023){:target="_blank" rel="noopener"}; back then
+    it was on paper and the size of a major city phone book (if you
+    are too young to know what that is, Google it). In High School I
+    joined the local Civil Defense with the idea of taking classes to
+    study for my amateur radio license. However, the folks that ran
+    Civil Defense were not ready to deal with exuberant teenagers and
+    nothing came of it.
+
+    Then I got distracted by CB radio and communicated with
+    friends that way until I went to college. At one point I
+    tried mounting a 6' whip to my bicycle and powering a
+    mobile CB with a battery pack. But there wasn't enough
+    power in the NiCad packs of the day and it did not
+    really work.
+
+    When I went to college I forgot about Ham Radio in
+    general.  After college, when I was working at the
+    Clarkson University Computing Center I initiated a
+    project to get business-band radios for the techs to
+    carry around to stay in contact.
+
+    Now that I'm retired I figured I can spend the time to study for
+    my license. I asked a neighbor friend who happens to be the
+    president of the [Tompkins County Amateur Radio
+    Association](https://tcara-ny.org){:target="_blank" rel="noopener"} for recommendations to study
+    for the exam. He recommended finding online tests and keep taking
+    them until I pass. I eventually ended up on
+    [hamstudy.org](https://hamstudy.org){:target="_blank" rel="noopener"} and their Android app and
+    took a couple dozen Technician exams and several dozen General
+    exams. Several weeks later I took the exams on August 2, 2025; I
+    aced the Technician exam and passed the General exam with 30 of 35
+    correct. I was initially assigned a call sign of
+    <strong>KE2GMJ</strong>.
+
+    On August 23, 2025 my vanity call sign came through. I'm
+    now [N2VLV](https://www.qrz.com/db/N2VLV){:target="_blank" rel="noopener"} (as in VoLVo).
+
+    While taking the Technician and General practice exams, I took
+    a practice exam for Amateur Extra and did horribly. Over the
+    next six weeks I kept studying and started passing, achieving
+    as high as 48 on two practice exams. On September 20, 2025 I
+    sat for the Amateur Extra exam and passed with 46 of 50
+    correct!
+
+    I submitted my open book exam to be
+    an ARRL accredited
+    [Volunteer Examiner](https://www.arrl.org/volunteer-examiners){:target="_blank" rel="noopener"}.
+    Instead of taking
+    3–4 weeks, my paperwork arrived exactly a week later.
+
+    ![Image of Jeff's AARL Volunteer Examiner Certificate](images/N2VLV_VE_Certificate.jpg){: width="75%" height="auto" }

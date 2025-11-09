@@ -55,119 +55,60 @@ title: N2VLV - Jeffrey Honig
   <div class="container my-4">
     <article class="bg-white p-4 rounded shadow-sm">
 
-      <!-- Interesting Ham Radio Projects first -->
-      <h3>Interesting Ham Radio Projects</h3>
-      <ul>
-	<li><a href="net_checkin.html" target=_blank>Net Checkin</a> -
-	A page to record and save net callsign checkins with lookup on
-	QRZ.com</li>
-        <li><a href="https://jch.honig.net/projects/ham-radio/xc70-antenna-tuning"
-        target=_blank>XC70-Antenna-Tuning</a> — Installing and
-        verifying a mobile antenna on my car</li>
-        <li><a href="https://jch.honig.net/projects/ham-radio/vgc-vr-n7500"
-        target=_blank>VGC VR-N7500</a> — An app-controlled mobile
-        radio</li>
-      </ul>
+      <section class="content-section container" id="articles">
+	<div class="container text-center mb-4">
+	</div>
 
-      <!-- Collapsible Biography section -->
-      <div class="mt-4">
-        <h3 class="mb-3">
-          <a class="d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#bioSection" role="button" aria-expanded="false" aria-controls="bioSection">
-            My Journey to Ham Radio
-            <span class="ms-2 collapse-arrow">&#9660;</span> <!-- down arrow -->
-          </a>
-        </h3>
+	{% for article in site.data.articles %}
+	<div class="card mx-5 my-3 shadow-sm">
+	  {% if article.Title %}
+	  <!-- Header toggles collapse -->
+	  <div class="card-header text-center fw-bold d-flex justify-content-between align-items-center"
+               data-bs-toggle="collapse"
+               data-bs-target="#collapse-{{ forloop.index }}"
+               aria-expanded="false"
+               aria-controls="collapse-{{ forloop.index }}"
+               style="cursor: pointer;">
+	    <span>{{ article.Title }}</span>
+	    <i class="bi bi-caret-down-fill" id="caret-{{ forloop.index }}"></i>
+	  </div>
+	  {% endif %}
 
-        <div class="collapse" id="bioSection">
-          <div class="card card-body">
-
-            <p>
-              When I was in Junior High School we visited a family friend
-              who was an amateur radio operator.  I was intrigued by
-              his ham shack.  He ended up giving me a Hallicrafters
-              short wave receiver.
-            </p>
-
-            <p>
-              Back at school I would carry around the
-              <a href="https://www.arrl.org" target="_blank"
-              rel="noopener">ARRL</a> Handbook; back then it was on
-              paper and the size of a major city phone book (if you
-              are too young to know what that is, google it). In High
-              School I joined the local Civil Defense with the idea of
-              taking classes to study for my amateur radio
-              license. However, the folks that ran Civil Defense were
-              not ready to deal with exuberant teenagers and nothing
-              came of it.
-            </p>
-
-            <p>
-              Then I got distracted by CB radio and communicated with
-              friends that way until I went to college. At one point I
-              tried mounting a 6' whip to my bicycle and powering a
-              mobile CB with a battery pack. But there wasn't enough
-              power in the NiCad packs of the day and it did not
-              really work.
-            </p>
-
-	    <p>
-	      When I went to college I forgot about Ham Radio in
-	      general.  After college, when I was working at the
-	      Clarkson University Computing Center I initiated a
-	      project to get business-band radios for the techs to
-	      carry around to stay in contact.
-	    </p>
-
-            <p>
-              Now that I'm retired I figured I can spend the time to
-              study for my license. I asked a neighbor friend who
-              happens to be the president of
-              the <a href="https://tcara-ny.org" target="_blank"
-              rel="noopener">Tompkins County Amateur Radio
-              Association</a> for recommendations to study for the
-              exam. He recommended finding online tests and keep
-              taking them until I pass. I eventually ended up on
-              <a href="https://hamstudy.org" target="_blank"
-              rel="noopener">hamstudy.org</a> and their Android app
-              and took a couple dozen Technician exams and several
-              dozen General exams. Several weeks later I took the
-              exams on August 2, 2025; I aced the Technician exam and
-              passed the General exam with 30 of 35 correct. I was
-              initially assigned a call sign
-              of <strong>KE2GMJ</strong>.
-            </p>
-
-            <p>
-              On August 23, 2025 my vanity call sign came through. I'm
-              now <a href="https://www.qrz.com/db/N2VLV"
-              target="_blank"
-              rel="noopener"><strong>N2VLV</strong></a> (as in VoLVo).
-            </p>
-
-            <p>
-              While taking the Technician and General practice exams, I took
-              a practice exam for Amateur Extra and did horribly. Over the
-              next six weeks I kept studying and started passing, achieving
-              as high as 48 on two practice exams. On September 20, 2025 I
-              sat for the Amateur Extra exam and passed with 46 of 50
-              correct!
-            </p>
-
-            <p>
-              I submitted my open book exam to be
-              an <a href="https://www.arrl.org" target="_blank"
-              rel="noopener">ARRL</a> accredited
-              <a href="https://www.arrl.org" target="_blank"
-              rel="noopener">Volunteer Examiner</a>. Instead of taking
-              3–4 weeks, my paperwork arrived exactly a week later.
-            </p>
-
-	    <img src="images/N2VLV_VE_Certificate.jpg" alt="Image of Jeff's AARL Volunteer Examiner Certificate">
-
-          </div>
-        </div>
-      </div>
+	  <div class="collapse" id="collapse-{{ forloop.index }}">
+	    <div class="card-body text-body p-4"
+		 {% if article.Background %}
+		 style="
+			background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
+                        url('{{ 'images/' | relative_url }}{{ article.Background }}');
+			background-size: cover; 
+			background-position: center;
+			"
+		 {% endif %}
+		 >
+              {{ article.Description | markdownify }}
+	    </div>
+	  </div>
+	</div>
+	{% endfor %}
+      </section>
 
     </article>
   </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  {% for article in site.data.articles %}
+  var collapseEl{{ forloop.index }} = document.getElementById('collapse-{{ forloop.index }}');
+  var caretEl{{ forloop.index }} = document.getElementById('caret-{{ forloop.index }}');
+
+  collapseEl{{ forloop.index }}.addEventListener('show.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-down-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-up-fill');
+  });
+  collapseEl{{ forloop.index }}.addEventListener('hide.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-up-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-down-fill');
+  });
+  {% endfor %}
+});
+</script>
