@@ -3,14 +3,18 @@ layout: default
 title: N2VLV - Jeffrey Honig
 ---
 
-  <!-- Bootstrap 5 -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
+<!-- Bootstrap 5 -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  /* ================================
+     Page Adjustments
+     ================================ */
+  body {
       padding-bottom: 80px; /* room for footer */
       background-color: #f8f9fa;
-    }
-    footer {
+  }
+  footer {
       position: fixed;
       bottom: 0;
       left: 0;
@@ -21,88 +25,139 @@ title: N2VLV - Jeffrey Honig
       padding: 10px 0;
       font-size: 0.9rem;
       color: #6c757d;
-    }
-    header img {
-      max-height: 300px;
-      object-fit: cover;
+  }
+
+  /* ================================
+     Forest Theme Header
+     ================================ */
+  header.page-header {
+      position: relative;
+      margin-bottom: 2rem;
+  }
+  header.page-header img {
       width: 100%;
-    }
-    .text-shadow {
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      object-fit: cover;
+      max-height: 300px;
+  }
+  header.page-header h1 {
+      --forest-dark: #6b9c5a;
+      --forest-deep: #3d6b35;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #f8f9f8;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(180deg, var(--forest-dark) 0%, var(--forest-deep) 100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
-    /* Arrow rotation for collapsible bio */
-    .collapse-arrow {
+  /* ================================
+     Forest Article Cards
+     ================================ */
+  .card.card-forest {
+      --forest-light: #d9ebd3;
+      --forest-mid:   #b9d6ac;
+      --forest-dark:  #6b9c5a;
+      --forest-deep:  #3d6b35;
+      --forest-text:  #2f4e28;
+
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 2px solid var(--forest-dark);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      color: var(--forest-text);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
+  }
+
+  .card.card-forest:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      border-color: var(--forest-deep);
+  }
+
+  /* Alternating header gradients */
+  .card-forest:nth-child(odd) .card-header {
+      background: linear-gradient(180deg, var(--forest-light) 0%, var(--forest-mid) 100%);
+      color: #f8f9f8;
+  }
+  .card-forest:nth-child(even) .card-header {
+      background: linear-gradient(180deg, var(--forest-mid) 0%, var(--forest-dark) 100%);
+      color: #f8f9f8;
+  }
+
+  /* Card body backgrounds */
+  .card-forest:nth-child(odd) .card-body {
+      background: linear-gradient(180deg, #f4faf2 0%, #e8f5e4 100%);
+  }
+  .card-forest:nth-child(even) .card-body {
+      background: linear-gradient(180deg, #f1f8ef 0%, #dcefd8 100%);
+  }
+
+  /* Collapse caret rotation */
+  .collapse-arrow {
       transition: transform 0.3s ease;
-    }
-    a[aria-expanded="true"] .collapse-arrow {
+  }
+  a[aria-expanded="true"] .collapse-arrow {
       transform: rotate(180deg);
-    }
-  </style>
+  }
+</style>
 
-  <!-- Responsive header image -->
-  <header class="mb-4">
-    <div class="container-fluid p-0 position-relative">
-      <img src="images/index_header.jpg" alt="Image of a ham radio,
-					      SWR meeter and other
-					      equipment on a messy workbench" class="img-fluid w-100">
-      <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
-        <h1 class="display-5 fw-bold text-shadow">{{ page.title }}</h1>
+<!-- ================================
+     Page Header
+     ================================ -->
+<header class="page-header">
+  <img src="images/index_header.jpg" alt="Ham radio and equipment">
+  <h1>{{ page.title }}</h1>
+</header>
+
+<!-- ================================
+     Article Cards
+     ================================ -->
+<div class="container my-4">
+  <section class="content-section" id="articles">
+
+    {% for article in site.data.articles %}
+    <div class="card card-forest mx-5 my-3 shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center"
+           data-bs-toggle="collapse"
+           data-bs-target="#collapse-{{ forloop.index }}"
+           aria-expanded="false"
+           aria-controls="collapse-{{ forloop.index }}"
+           style="cursor: pointer;">
+        <span>{{ article.Title }}</span>
+        <i class="bi bi-caret-down-fill collapse-arrow"></i>
+      </div>
+
+      <div class="collapse" id="collapse-{{ forloop.index }}">
+        <div class="card-body p-4
+                    {% if article.Background %}card-body-bg{% endif %}"
+             {% if article.Background %}
+             style="
+               background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+                          url('{{ 'images/' | relative_url }}{{ article.Background }}');
+               background-size: cover;
+               background-position: center;
+             "
+             {% endif %}>
+          {{ article.Description | markdownify }}
+        </div>
       </div>
     </div>
-  </header>
+    {% endfor %}
 
-  <div class="container my-4">
-    <article class="bg-white p-4 rounded shadow-sm">
-
-      <section class="content-section container" id="articles">
-	<div class="container text-center mb-4">
-	</div>
-
-	{% for article in site.data.articles %}
-	{% assign alt = forloop.index0 | modulo: 2 %}
-	<div class="card mx-5 my-3 shadow-sm">
-	  {% if article.Title %}
-	  <!-- Header toggles collapse -->
-	  <div class="card-header
-		      {% if alt == 0 %}card-forest-light{% else %}card-forest-dark{% endif %}
-		      text-center fw-bold d-flex justify-content-between align-items-center"
-               data-bs-toggle="collapse"
-               data-bs-target="#collapse-{{ forloop.index }}"
-               aria-expanded="false"
-               aria-controls="collapse-{{ forloop.index }}"
-               style="cursor: pointer;">
-	    <span>{{ article.Title }}</span>
-	    <i class="bi bi-caret-down-fill" id="caret-{{ forloop.index }}"></i>
-	  </div>
-	  {% endif %}
-
-	  <div class="collapse" id="collapse-{{ forloop.index }}">
-	    <div class="card-body text-body p-4"
-		 {% if article.Background %}
-		 style="
-			background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
-                        url('{{ 'images/' | relative_url }}{{ article.Background }}');
-			background-size: cover; 
-			background-position: center;
-			"
-		 {% endif %}
-		 >
-              {{ article.Description | markdownify }}
-	    </div>
-	  </div>
-	</div>
-	{% endfor %}
-      </section>
-
-    </article>
-  </div>
+  </section>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   {% for article in site.data.articles %}
   var collapseEl{{ forloop.index }} = document.getElementById('collapse-{{ forloop.index }}');
-  var caretEl{{ forloop.index }} = document.getElementById('caret-{{ forloop.index }}');
+  var caretEl{{ forloop.index }} = collapseEl{{ forloop.index }}.querySelector('.collapse-arrow');
 
   collapseEl{{ forloop.index }}.addEventListener('show.bs.collapse', function () {
     caretEl{{ forloop.index }}.classList.remove('bi-caret-down-fill');
