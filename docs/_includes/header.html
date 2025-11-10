@@ -1,0 +1,101 @@
+<!-- _includes/header.html -->
+<style>
+  /* Light forest green gradient theme */
+  .navbar-forest {
+    background: linear-gradient(180deg, #4f7b44 0%, #3d6b35 100%);
+    position: sticky;
+    top: 0;
+    z-index: 1020; /* Keeps navbar above content */
+  }
+  .navbar-forest .navbar-brand,
+  .navbar-forest .nav-link,
+  .navbar-forest .dropdown-item {
+    color: #f8f9f8 !important;
+  }
+  .navbar-forest .nav-link:hover,
+  .navbar-forest .dropdown-item:hover {
+    color: #ffffff !important;
+    background-color: #2f4e28 !important;
+  }
+  .navbar-forest .dropdown-menu {
+    background: linear-gradient(180deg, #4f7b44 0%, #3d6b35 100%);
+    border: none;
+  }
+  .navbar-toggler {
+    border-color: rgba(255,255,255,0.4);
+  }
+  .navbar-toggler-icon {
+    filter: invert(1) brightness(1.5);
+  }
+
+  /* Active link styling */
+  .navbar-forest .nav-link.active,
+  .navbar-forest .dropdown-item.active {
+    font-weight: 600;
+    text-decoration: underline;
+    background-color: #2f4e28 !important;
+    color: #ffffff !important;
+  }
+
+  /* Brand icon alignment */
+  .navbar-brand img {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    vertical-align: text-bottom;
+  }
+  /* ========== Forest Card Theme ========== */
+  .card-forest {
+    background: linear-gradient(180deg, #5b8b4b 0%, #3d6b35 100%);
+    color: #f8f9f8;
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .card-forest:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  }
+
+  .card-forest .card-title {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .card-forest .card-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .card-forest .card-text {
+    color: #f0f3ef;
+  }
+
+  .card-forest a {
+    color: #d4f0d1;
+    text-decoration: underline;
+  }
+
+  .card-forest a:hover {
+    color: #ffffff;
+  }
+
+  .card-forest .btn {
+    background-color: #2f4e28;
+    color: #ffffff;
+    border: none;
+  }
+
+  .card-forest .btn:hover {
+    background-color: #284222;
+  }
+
+  .card-forest-light {
+    background: linear-gradient(180deg, #6b9c5a 0%, #4f7b44 100%);
+  }
+
+  .card-forest-dark {
+    background: linear-gradient(180deg, #3d6b35 0%, #2f4e28 100%);
+  }  
+</style>
