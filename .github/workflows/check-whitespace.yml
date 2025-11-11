@@ -1,22 +1,29 @@
 name: PR Workflow
 
 on:
+  push:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  build:
+  precommit:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      # 2️⃣ Set up Python (pre-commit requires Python)
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          node-version: '20'
+          python-version: '3.x'
 
-      - name: Run your commands
-        run: |
-          echo "This runs on PR opened or synchronize"
+      # 3️⃣ Install pre-commit
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      # 4️⃣ Run all pre-commit hooks on all files
+      - name: Run pre-commit hooks
+        run: pre-commit run --all-files
