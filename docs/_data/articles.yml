@@ -3,7 +3,7 @@
   Description: |
     [Net Check-in](net_checkin.html){:target="_blank" rel="noopener"} is a stand-alone web page that
     lets you record net check-ins with QRZ lookups.
-    
+
 - Title: VGC VR-N7500
   Background: index_header.jpg
   Description: |
@@ -61,7 +61,7 @@
 
 
     ## App Control
-    
+
     The HT app works fine from my Pixel 9 Pro.  I tried running the
     Android App on an x86 and ARM ChromeBook, but it was unable to
     connect to the radio.  I guess I need an Android Tablet in the
