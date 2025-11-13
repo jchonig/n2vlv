@@ -1,0 +1,47 @@
+name: Daily Flickr Previews
+
+on:
+  schedule:
+    # Run daily at 02:00 UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: # Allows manual triggering
+
+permissions:
+  contents: write # Allows committing images
+
+jobs:
+  update-flickr-previews:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # Needed to push changes
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
+
+      # Run Flickr previews script
+      - name: Run flickr_previews
+        run: |
+          python git-hooks/flickr_previews -v --root-dir docs --image-dir images/flickr-previews
+
+      # Commit and push changes if any
+      - name: Commit updated images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/images/flickr-previews/
+          git diff --cached --quiet || git commit -m "Update Flickr preview images [ci skip]"
+          git push

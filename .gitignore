@@ -1,6 +1,7 @@
 #*
 *.new
 *~
+.env
 .DS_Store
 _dl/
 docs/_site/

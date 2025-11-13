@@ -1,4 +1,3 @@
----
 services:
   web:
     build: build
@@ -6,5 +5,28 @@ services:
       - ./docs:/src/site
     ports:
       - "4000:4000"
-    container_name: n2vlv
-...
+    container_name: n2vlv.net
+    command: jekyll serve --watch --drafts --incremental --host 0.0.0.0
+    develop:
+      watch:
+        - action: restart
+          path: ./build
+        - action: restart
+          path: ./docker-compose.yaml
+
+  watcher:
+    image: python:3-alpine
+    volumes:
+      - ./docs:/src/site
+      - ./build:/build:ro
+      - ./git-hooks:/git-hooks
+    container_name: n2vlv_watcher
+    command: "/build/watch.sh"
+    develop:
+      watch:
+        - action: restart
+          path: ./build/
+        - action: restart
+          path: ./git-hooks/
+        - action: restart
+          path: ./docker-compose.yaml

@@ -15,7 +15,7 @@ all: fetch
 	${MAKE} up
 
 up:
-	docker compose up --build
+	docker compose up --build --watch
 
 build: fetch
 	docker compose build

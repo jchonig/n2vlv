@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+import argparse
+import logging
+import re
+import requests
+from pathlib import Path
+import sys
+import hashlib
+import yaml
+
+# -----------------------------
+# Argument Parsing
+# -----------------------------
+def parse_args():
+    parser = argparse.ArgumentParser(description="Download Flickr previews for .external-link-flickr links.")
+    parser.add_argument("-d", "--debug", action="store_true", help="Print debugging messages")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Print verbose messages")
+    parser.add_argument("-n", "--noop", action="store_true", help="Don't make changes, just show what would be done")
+    parser.add_argument("--image-dir", default="images/flickr-previews", help="Directory to store downloaded images")
+    parser.add_argument("--root-dir", default="docs", help="Root directory to scan for Markdown/HTML/YAML files")
+    return parser.parse_args()
+
+# -----------------------------
+# Logging
+# -----------------------------
+def init_logging(debug=False, verbose=False):
+    level = logging.DEBUG if debug else logging.INFO if verbose else logging.WARNING
+    logging.basicConfig(format="%(levelname)s: %(message)s", level=level)
+
+# -----------------------------
+# Regex for Flickr links
+# -----------------------------
+FLICKR_LINK_RE = re.compile(
+    r"https?://(?:www\.flickr\.com|flic\.kr)/\s*(p|s|gp)/\s*([A-Za-z0-9]+)",
+    re.IGNORECASE | re.DOTALL
+)
+
+# -----------------------------
+# Find files
+# -----------------------------
+def find_files(root_dir: Path):
+    files_to_scan = []
+    for subdir in root_dir.iterdir():
+        if subdir.is_dir() and not subdir.name.startswith("_"):
+            files_to_scan.extend(subdir.rglob("*.md"))
+            files_to_scan.extend(subdir.rglob("*.html"))
+    # YAML files in _data
+    data_dir = root_dir / "_data"
+    if data_dir.exists():
+        files_to_scan.extend(data_dir.rglob("*.yml"))
+    return files_to_scan
+
+# -----------------------------
+# Extract Flickr keys
+# -----------------------------
+def get_flickr_keys(files):
+    keys = set()
+    private_links = []
+    for file_path in files:
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read().replace("\n", "")
+            for match in FLICKR_LINK_RE.findall(content):
+                type_, key = match
+                if type_ == "gp":
+                    logging.error(f"Private /gp/ link detected in {file_path}: {key}")
+                    private_links.append(f"{file_path}: {key}")
+                else:
+                    keys.add((type_, key))
+                    logging.debug(f"Found link in {file_path}: {type_}/{key}")
+    return keys, private_links
+
+# -----------------------------
+# Get preview URL
+# -----------------------------
+def get_preview_url(flickr_type, key):
+    """
+    Use Flickr oEmbed API to get image thumbnail URL.
+    Handles /p/ (photo) and /s/ (album) links.
+    """
+    oembed_url = f"https://www.flickr.com/services/oembed?url=https://flic.kr/{flickr_type}/{key}&format=json&maxwidth=400"
+    try:
+        r = requests.get(oembed_url, timeout=10)
+        r.raise_for_status()
+        data = r.json()
+        if "url" in data:
+            return data["url"]
+        elif "thumbnail_url" in data:
+            return data["thumbnail_url"]
+        else:
+            logging.warning(f"No preview found in oEmbed response for {flickr_type}/{key}")
+            return None
+    except Exception as e:
+        logging.warning(f"Failed to fetch preview for {flickr_type}/{key}: {e}")
+        return None
+
+# -----------------------------
+# Compute MD5 of a file
+# -----------------------------
+def md5_file(path: Path):
+    if not path.exists():
+        return None
+    h = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+# -----------------------------
+# Download image if changed
+# -----------------------------
+def download_image(url, path: Path, noop=False):
+    if noop:
+        logging.info(f"[NOOP] Would download {url} -> {path}")
+        return
+
+    try:
+        r = requests.get(url, timeout=10)
+        r.raise_for_status()
+        new_content = r.content
+
+        old_hash = md5_file(path)
+        new_hash = hashlib.md5(new_content).hexdigest()
+        if old_hash == new_hash:
+            logging.debug(f"No change detected for {path}, skipping download.")
+            return
+
+        path.write_bytes(new_content)
+        logging.info(f"Downloaded/Updated: {path}")
+
+    except Exception as e:
+        logging.warning(f"Failed to download {url}: {e}")
+
+# -----------------------------
+# Cleanup old images
+# -----------------------------
+def cleanup_images(image_dir: Path, valid_keys, noop=False):
+    for f in image_dir.glob("*"):
+        if f.stem not in valid_keys:
+            if noop:
+                logging.info(f"[NOOP] Would remove old preview: {f}")
+            else:
+                f.unlink()
+                logging.info(f"Removed old preview: {f}")
+
+# -----------------------------
+# Main
+# -----------------------------
+def main():
+    args = parse_args()
+    init_logging(debug=args.debug, verbose=args.verbose)
+
+    root_dir = Path(args.root_dir)
+    image_dir = Path(root_dir) / Path(args.image_dir)
+    image_dir.mkdir(parents=True, exist_ok=True)
+
+    files = find_files(root_dir)
+    logging.info(f"Scanning {len(files)} files for Flickr links")
+
+    keys, private_links = get_flickr_keys(files)
+    logging.info(f"Found {len(keys)} public Flickr keys")
+    if private_links:
+        logging.error(f"Found {len(private_links)} private /gp/ links!")
+
+    # Download public previews, re-download if changed
+    for type_, key in keys:
+        img_path = image_dir / f"{key}.jpg"
+        preview_url = get_preview_url(type_, key)
+        if preview_url:
+            download_image(preview_url, img_path, noop=args.noop)
+        else:
+            logging.warning(f"No preview URL for {type_}/{key}")
+
+    # Cleanup unused previews
+    valid_key_names = {k for _, k in keys}
+    cleanup_images(image_dir, valid_key_names, noop=args.noop)
+
+    # Exit with error if private links exist
+    if private_links:
+        logging.error("Commit blocked due to private /gp/ links:")
+        for link in private_links:
+            logging.error(f"  {link}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

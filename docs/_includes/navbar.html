@@ -1,0 +1,35 @@
+<!-- _includes/navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-forest shadow-sm">
+  <div class="container-fluid">
+    <!-- Brand with favicon -->
+    <a class="navbar-brand fw-semibold d-flex align-items-center" href="/">
+      <img src="favicon.ico" alt="Honig.net logo">
+      Honig.net
+    </a>
+
+    <!-- Toggle for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto">
+        <!-- People Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if page.url contains '/people' %}active{% endif %}" href="#" id="peopleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            People
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="peopleDropdown">
+            <li>
+              <a class="dropdown-item {% if page.url contains 'jch' %}active{% endif %}" href="jch">Jeffrey Honig</a>
+            </li>
+            <li>
+              <a class="dropdown-item {% if page.url contains 'sue' %}active{% endif %}" href="https://www.facebook.com/sue.honig">Sue Honig</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
