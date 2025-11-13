@@ -1,0 +1,62 @@
+---
+layout: default
+title: My Radios
+background: images/radios_bg.jpg
+---
+<section class="content-section container" id="radios">
+  <div class="container text-center mb-4">
+    <h2 class="mb-2">Radios</h2>
+    <p class="lead">Radios that I own or owned</p>
+  </div>
+
+  {% for radio in site.data.radios %}
+  <div class="card card-forest mx-5 my-3 shadow-sm">
+    {% if radio.Title %}
+    <!-- Header toggles collapse -->
+    <div class="card-header card-forest
+		text-center fw-bold d-flex justify-content-between align-items-center"
+         data-bs-toggle="collapse"
+         data-bs-target="#collapse-{{ forloop.index }}"
+         aria-expanded="false"
+         aria-controls="collapse-{{ forloop.index }}"
+         style="cursor: pointer;">
+      <span>{{ radio.Title }}</span>
+      <i class="bi bi-caret-down-fill" id="caret-{{ forloop.index }}"></i>
+    </div>
+    {% endif %}
+
+    <div class="collapse" id="collapse-{{ forloop.index }}">
+      <div class="card-body text-body p-4"
+           {% if radio.Background %}
+           style="
+             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+                         url('{{ 'jch/images/' | relative_url }}{{ radio.Background }}');
+             background-size: cover;
+             background-position: center;
+           "
+           {% endif %}
+      >
+        {{ radio.Description | markdownify }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  {% for radio in site.data.radios %}
+  var collapseEl{{ forloop.index }} = document.getElementById('collapse-{{ forloop.index }}');
+  var caretEl{{ forloop.index }} = document.getElementById('caret-{{ forloop.index }}');
+
+  collapseEl{{ forloop.index }}.addEventListener('show.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-down-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-up-fill');
+  });
+  collapseEl{{ forloop.index }}.addEventListener('hide.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-up-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-down-fill');
+  });
+  {% endfor %}
+});
+</script>

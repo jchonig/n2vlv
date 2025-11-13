@@ -1,0 +1,115 @@
+---
+- Title: VGC VR-N7500
+  Background: index_header.jpg
+  Description: |
+    ## My First Radio
+    Well, technically my first radio was a QuanSheng UV-K6 (aka QuanSheng UV-K5(8)) which is a $30 UHF/VHF HT.  But that's another story.
+
+    While looking at radios I was intrigued by the Vero/VGC VR-N76 HT
+    which has a plethora of digital capabilities and can be fully app
+    controlled.  Then I learned about the VR-N7500 which is a headless
+    50W mobile with full control from an Android App via Bluetooth.
+    There were some pointers to the BHM-78 which looks like a HT, but
+    is just a Bluetooth remote for the radio.  But they don't make
+    them anymore.
+
+    Then I found someone near Buffallo on Facebook Marketplace that
+    had both a BHM-78 and an N7500 for sale.  Unfortunately for my
+    patience, shipping was much cheaper than a 480 mile drive.
+
+    I plugged the radio into a 12V power supply and connected the HT
+    app and the first thing it did was ask if I wanted to update the
+    Firmware.  Of course I did.
+
+    Then I paired the BHM-78 and started playing around.
+
+    ## Audio
+
+    There are many ways to send and receive on the radio
+
+    The optional wired handset
+      + An external speaker (receive only)
+      + Via the HT app through the phone (and then out to other BT devices)
+      + Via the BHM-78 handset
+      + Directly connected BT headsets
+
+    THe VGC handsets have PTT buttons. Via the phone you need to hold a button on the phone.  There is a Bluetooth PTT switch that you can wear like a ring.
+
+    The BHM-78 will also connect to a phone for audio.
+
+    ## SSTV
+
+    KD2EAT recommended I try receiving an SSTV signal in preparation
+    for receiving a balloon launch on August 13.  I spent a lot of
+    time searching the web to figure out how to do it.  Do I need to
+    install Robot36?  Another App?  Then I read something that said
+    the HT app will just decode the signal if you go into the Messages
+    tab.  So KD2EAT keyed up his base and sent a picture.
+
+    At first we were talking on the phone via the car Speakerphone and
+    the HT app was picking up the audio which distorted the signal.
+
+    It's also necessary to turn off APRS while receiving SSTV as it
+    can interfere with the decoding of the image.
+
+    ![HT App Messages Screen](images/n7500_sstv.png){: width="50%" height="auto"}
+
+
+    ## App Control
+
+    The HT app works fine from my Pixel 9 Pro.  I tried running the
+    Android App on an x86 and ARM ChromeBook, but it was unable to
+    connect to the radio.  I guess I need an Android Tablet in the
+    vehicle for dedicated control of the radio....
+
+    ## Installation
+
+    I purchased a used Android tablet (Samsung Galaxy Tab A9+) and a
+    DCHouse 12V 100AH LiFePo4 trolling motor battery to avoid putting
+    a strain on my car battery.  The battery can charge via a LiOn
+    charger, via a DC port, or via USB-C (at 60W).
+
+    ![Mobile battery](images/mobile_battery.jpg){: width="50%" height="auto" }
+
+    I tested this installation by listening in on a few TCARA Sunday
+    Night Nets and having a conversation with Mike (KD2EAT) over the
+    hill into Trumansburg.  This was primarily using Bluetooth to the
+    car Speakerphone.
+
+    ![HT App on tablet](images/ht_tablet.jpg){: width="75%" height="auto" }
+
+- Title: Quansheng UV-K6
+  Description: |
+    TBD
+
+- Title: Baufeng UV-5R Mini
+  Description: |
+    TBD
+
+- Title: Tidradio TD-H3 Plus
+  Description: |
+    TBD
+
+- Title: Yaesu FTM-3200DR
+  Description: |
+    TBD
+
+- Title: Yaesu FTM-3207DR
+  Description: |
+    TBD
+
+- Title: Tidradio TD-H9
+  Description: |
+    TBD
+
+- Title: RTL-SDR V4
+  Description: |
+    TBD
+
+- Title: HotSpodRadio-USB
+  Description: |
+    TBD
+
+- Title: DigiRig Mobile
+  Description: |
+    TBD
