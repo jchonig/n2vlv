@@ -92,15 +92,30 @@
 
 - Title: Yaesu FTM-3200DR
   Description: |
-    TBD
+    A VHF Analog and Fusion mobile radio that I saw for sale locally
+    for a decent price.
+    My plan is to set it up as an Allstar node with a DigiRig Mobile
+    so I can access a local repeater when I am travelling.
+
+    Supposedly has frequency programming support from Chirp, so I
+    ordered the specific FTDI cable.
+
+    It uses an RJ-12 cable for Mic and PTT with a 3.5mm connector for
+    a speaker.
+    DX Engineering had a DigiRig Mobile package with the required
+    cable and a USB-C cable, so I picked that up.
 
 - Title: Yaesu FTM-3207DR
   Description: |
-    TBD
+    The UHF Analog and Fusion version of the FTM-3200DR.
+    It was for sale with that other radio so I picked it up.
 
 - Title: Tidradio TD-H9
   Description: |
-    TBD
+    This is a new radio from Tidradio that has yet to be release.  I
+    pre-ordered this radio because it has built-in GPS and APRS,
+    Bluetooth programing and audio, promised bi-weekly updates and a
+    sub-$100 price-tag.
 
 - Title: RTL-SDR V4
   Description: |
