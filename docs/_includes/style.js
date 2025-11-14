@@ -1,0 +1,84 @@
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+       document.querySelectorAll('a.external-link').forEach(function(a){
+	   try {
+	       // only add for absolute URLs (optional)
+	       if (a.hostname && a.hostname !== location.hostname) {
+		   a.setAttribute('target','_blank');
+		   a.setAttribute('rel','noopener noreferrer');
+	       }
+	   } catch(e){ /* defensive */ }
+       });
+   });
+
+   document.addEventListener('DOMContentLoaded', function () {
+       document.querySelectorAll('a.external-link-preview').forEach(link => {
+	   const href = link.getAttribute('href');
+	   // If the href points to an image, use it directly
+	   if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(href)) {
+	       link.style.setProperty('--preview-url', `url(${href})`);
+	   } else {
+	       // Optional: You can add logic here to map non-image URLs
+	       // (e.g., Flickr, YouTube) to preview thumbnails.
+	       link.style.setProperty('--preview-url', `none`);
+	   }
+       });
+   });
+
+   document.addEventListener("DOMContentLoaded", () => {
+       // Create a single floating preview element
+       const preview = document.createElement('div');
+       preview.id = 'flickr-hover-preview';
+       document.body.appendChild(preview);
+
+       document.querySelectorAll('a.external-link-flickr').forEach(link => {
+           const match = link.href.match(/https?:\/\/(?:www\.flickr\.com|flic\.kr)\/(p|s)\/([A-Za-z0-9]+)/);
+           if (match) {
+               const key = match[2];
+               const previewPath = `/images/flickr-previews/${key}.jpg`;
+               link.dataset.preview = previewPath;
+           }
+
+           // Always open externally
+           link.setAttribute('target', '_blank');
+           link.setAttribute('rel', 'noopener noreferrer');
+
+           // Show preview on hover
+           link.addEventListener('mouseenter', (e) => {
+               const img = link.dataset.preview;
+               if (!img) return;
+               preview.style.backgroundImage = `url('${img}')`;
+               preview.style.display = 'block';
+               preview.style.opacity = '1';
+               positionPreview(e);
+           });
+
+           // Update preview position when moving mouse
+           link.addEventListener('mousemove', positionPreview);
+
+           // Hide preview on leave
+           link.addEventListener('mouseleave', () => {
+               preview.style.opacity = '0';
+               setTimeout(() => preview.style.display = 'none', 200);
+           });
+       });
+
+       // Reposition preview near cursor
+       function positionPreview(e) {
+           const xOffset = 20;
+           const yOffset = 20;
+           const previewRect = preview.getBoundingClientRect();
+           let x = e.clientX + xOffset;
+           let y = e.clientY + yOffset;
+
+           // Prevent overflow off screen
+           if (x + previewRect.width > window.innerWidth)
+               x = e.clientX - previewRect.width - xOffset;
+           if (y + previewRect.height > window.innerHeight)
+               y = e.clientY - previewRect.height - yOffset;
+
+           preview.style.left = `${x}px`;
+           preview.style.top = `${y}px`;
+       }
+   });
+  </script>

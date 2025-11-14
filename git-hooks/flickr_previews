@@ -57,16 +57,19 @@ def get_flickr_keys(files):
     keys = set()
     private_links = []
     for file_path in files:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read().replace("\n", "")
-            for match in FLICKR_LINK_RE.findall(content):
-                type_, key = match
-                if type_ == "gp":
-                    logging.error(f"Private /gp/ link detected in {file_path}: {key}")
-                    private_links.append(f"{file_path}: {key}")
-                else:
-                    keys.add((type_, key))
-                    logging.debug(f"Found link in {file_path}: {type_}/{key}")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read().replace("\n", "")
+                for match in FLICKR_LINK_RE.findall(content):
+                    type_, key = match
+                    if type_ == "gp":
+                        logging.error(f"Private /gp/ link detected in {file_path}: {key}")
+                        private_links.append(f"{file_path}: {key}")
+                    else:
+                        keys.add((type_, key))
+                        logging.debug(f"Found link in {file_path}: {type_}/{key}")
+        except OSError as error:
+            logging.warning("Opening: %s: %s", file_path, error)
     return keys, private_links
 
 # -----------------------------

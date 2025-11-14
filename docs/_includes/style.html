@@ -1,0 +1,376 @@
+<style>
+    {% assign forest_light = "#d9ebd3" %}
+    {% assign forest_mid   = "#b9d6ac" %}
+    {% assign forest_dark  = "#6b9c5a" %}
+    {% assign forest_deep  = "#3d6b35" %}
+    {% assign forest_text  = "#2f4e28" %}
+    {% assign forest_nav1 = "#3d6b35" %}
+    {% assign forest_nav2 = "#2b5126" %}
+    {% assign forest_text_light = "#f8f9f8" %}
+    {% assign white = "#ffffff" %}
+
+    /* ================================
+    Page Adjustments
+    ================================ */
+    body {
+	padding-bottom: 80px; /* room for footer */
+	background-color: #f8f9fa;
+    }
+    footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	border-top: 1px solid #dee2e6;
+	text-align: center;
+	padding: 10px 0;
+	font-size: 0.9rem;
+	color: #6c757d;
+    }
+
+    /* ================================
+    Forest Theme Header
+    ================================ */
+    /* Base header layout */
+    header.page-header {
+	position: relative;
+	margin-bottom: 2rem;
+    }
+
+    /* Image version */
+    header.page-header img {
+	width: 100%;
+	object-fit: cover;
+	max-height: 300px;
+	display: block;
+    }
+
+    /* The h1 forest pill — SAME for both versions */
+    /* The h1 forest pill — SAME for both versions */
+    header.page-header h1 {
+	--forest-dark: {{ forest_dark }};
+	--forest-deep: {{ forest_deep }};
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: inline-block;         /* ensures box is sized to text */
+	padding: 0.5rem 1rem;
+
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: {{ forest_text_light }};
+	text-align: center;
+
+	border-radius: 0.75rem;
+	background: linear-gradient(180deg, var(--forest-dark), var(--forest-deep));
+	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* No-image version — ONLY replace the img with a background gradient */
+    header.page-header.no-image {
+	/* Must match the image max-height so the h1 centers identically */
+	height: 300px;
+
+	/* Forest gradient background */
+	--forest-light: {{ forest_light }};
+	--forest-mid:   {{ forest_mid }};
+	--forest-dark:  {{ forest_dark }};
+
+	background: linear-gradient(
+            180deg,
+            var(--forest-light) 0%,
+            var(--forest-mid)   50%,
+            var(--forest-dark)  100%
+	);
+
+	border-radius: 0.75rem;     /* optional rounded corners */
+	overflow: hidden;           /* keeps rounding clean */
+
+	padding: 0;                 /* IMPORTANT: ensures h1 centers identically */
+    }
+
+    /* Light forest green gradient theme */
+    .navbar-forest {
+	background: linear-gradient(180deg, {{ forest_nav1 }} 0%, {{ forest_nav2 }} 100%);
+	position: sticky;
+	top: 0;
+	z-index: 1020;
+    }
+    .navbar-forest .navbar-brand,
+    .navbar-forest .nav-link,
+    .navbar-forest .dropdown-item {
+	color: {{ forest_text_light }} !important;
+    }
+    .navbar-forest .nav-link:hover,
+    .navbar-forest .dropdown-item:hover {
+	color: {{ white }} !important;
+	background-color: {{ forest_deep }} !important;
+    }
+    .navbar-forest .dropdown-menu {
+	background: linear-gradient(180deg, {{ forest_nav1 }} 0%, {{ forest_nav2 }} 100%);
+	border: none;
+    }
+    .navbar-toggler {
+	border-color: rgba(255,255,255,0.4);
+    }
+    .navbar-toggler-icon {
+	filter: invert(1) brightness(1.5);
+    }
+
+    /* Active link styling */
+    .navbar-forest .nav-link.active,
+    .navbar-forest .dropdown-item.active {
+	font-weight: 600;
+	text-decoration: underline;
+	background-color: {{ forest_deep }} !important;
+	color: {{ white }} !important;
+    }
+
+    /* Brand icon alignment */
+    .navbar-brand img {
+	height: 24px;
+	width: 24px;
+	margin-right: 8px;
+	vertical-align: text-bottom;
+    }
+
+    /* ========== Forest Card Theme ========== */
+    .card.card-forest {
+	--forest-light: {{ forest_light }};
+	--forest-mid:   {{ forest_mid }};
+	--forest-dark:  {{ forest_dark }};
+	--forest-deep:  {{ forest_deep }};
+	--forest-text:  {{ forest_text }};
+
+	background: linear-gradient(180deg, var(--forest-mid) 0%, var(--forest-dark) 100%);
+	color: var(--forest-text);
+	border: 2px solid var(--forest-dark);
+	border-radius: 0.75rem;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
+    }
+
+    .card.card-forest:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+	border-color: var(--forest-deep);
+    }
+
+    /* Header text */
+    .card-forest .card-title {
+	color: var(--forest-text);
+	font-weight: 600;
+    }
+    .card-forest .card-subtitle {
+	color: rgba(47, 78, 40, 0.8);
+    }
+
+    /* Buttons */
+    .card-forest .btn {
+	background-color: var(--forest-deep);
+	color: {{ white }};
+	border: none;
+	transition: background-color 0.15s ease;
+    }
+    .card-forest .btn:hover {
+	background-color: #263c20;
+    }
+
+    /* Header links */
+    .card-forest .card-header a {
+	color: var(--forest-text);
+	text-decoration: underline;
+    }
+    .card-forest .card-header a:hover {
+	color: #1f341b;
+    }
+
+    /* Image cards with overlay */
+    .card-forest .card-body[style*="background"] {
+	position: relative;
+	color: var(--forest-text);
+	transition: color 0.2s ease;
+    }
+
+    .card-forest .card-body[style*="background"]::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(255, 255, 255, 0.85);
+	z-index: 0;
+	transition: background 0.3s ease;
+    }
+
+    .card-forest .card-body[style*="background"] * {
+	position: relative;
+	z-index: 1;
+    }
+
+    .card-forest .card-body[style*="background"]:hover::before {
+	background: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Alternating header gradients */
+    .content-section .card:nth-child(odd) .card-header.card-forest {
+	background: linear-gradient(180deg, var(--forest-light) 0%, var(--forest-mid) 100%);
+    }
+    .content-section .card:nth-child(even) .card-header.card-forest {
+	background: linear-gradient(180deg, var(--forest-mid) 0%, var(--forest-dark) 100%);
+    }
+
+    /* Much lighter backgrounds for non-image cards */
+    .content-section .card:nth-child(odd) .card-body:not([style*="background"]) {
+	background: linear-gradient(180deg, #f4faf2 0%, #e8f5e4 100%);
+	color: var(--forest-text);
+    }
+    .content-section .card:nth-child(even) .card-body:not([style*="background"]) {
+	background: linear-gradient(180deg, #f1f8ef 0%, #dcefd8 100%);
+	color: var(--forest-text);
+    }
+
+    .card-forest-light-border {
+	border: 2px solid var(--forest-mid);
+    }
+
+    /* Add icon to external links */
+    .external-link::after {
+	content: "↗"; /* fallback glyph */
+	margin-left: 0.25em;
+	font-size: 0.9em;
+    }
+
+    /* Base link style */
+    a.external-link-preview {
+	position: relative;
+	text-decoration: none;
+	color: var(--bs-link-color, #0d6efd);
+	cursor: zoom-in;
+    }
+
+    /* External link icon */
+    a.external-link-preview::after {
+	content: "↗";
+	font-size: 0.8em;
+	margin-left: 0.2em;
+	vertical-align: text-top;
+	opacity: 0.7;
+	transition: opacity 0.2s ease;
+    }
+
+    /* Light hover effect on the icon */
+    a.external-link-preview:hover::after {
+	opacity: 1;
+    }
+
+    /* Base link */
+    a.external-link-flickr {
+	text-decoration: underline;
+	color: #0066cc;
+	position: relative;
+    }
+
+    a.external-link-flickr::after {
+	content: "↗";
+	font-size: 0.8em;
+	margin-left: 0.2em;
+	vertical-align: text-top;
+	opacity: 0.7;
+    }
+
+    /* Floating preview box */
+    #flickr-hover-preview {
+	position: fixed;
+	display: none;
+	width: 280px;
+	height: 180px;
+	background-size: cover;
+	background-position: center;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 0.5em;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+	z-index: 9999;
+	pointer-events: none;
+	transition: opacity 0.2s ease-in-out;
+	opacity: 0;
+    }
+
+    /* Home page cards */
+    .home-card {
+	background-color: rgba(232, 247, 232, 0.3); /* light green, semi-transparent */
+	border: 2px solid #4f7b44; /* medium green border */
+	border-radius: 0.75rem;
+	padding: 1rem 1.25rem;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .home-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+	border-color: {{ forest_dark }}; /* lighter green on hover */
+    }
+
+    /* Alternate border colors for multiple cards */
+    .home-card:nth-child(odd) {
+	border-color: #4f7b44; /* medium green */
+    }
+    .home-card:nth-child(even) {
+	border-color: {{ forest_dark }}; /* light green */
+    }
+
+    /* Hero image container with forest border and hover effect */
+    .hero-container {
+	border: 3px solid #4f7b44; /* forest green border */
+	border-radius: 0.5rem;
+	overflow: hidden;
+	transition: border-color 0.3s ease;
+    }
+
+    .hero-container:hover {
+	border-color: #8fc88f; /* lighter green on hover */
+    }
+
+    .hero-bg {
+	background-size: cover;
+	background-position: center;
+	height: 250px;
+	position: relative;
+	transition: transform 0.3s ease;
+    }
+
+    .hero-container:hover .hero-bg {
+	transform: scale(1.02); /* subtle zoom effect on hover */
+    }
+
+    .hero-overlay {
+	background-color: rgba(0,0,0,0.4);
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.3s ease;
+    }
+
+    .hero-container:hover .hero-overlay {
+	background-color: rgba(0,0,0,0.3); /* lighten overlay slightly */
+    }
+
+    /* Hero header text with hover effect */
+    .hero-overlay h1 {
+	color: rgba(255,255,255,0.9); /* almost white */
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+	transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .hero-container:hover .hero-overlay h1 {
+	color: {{ white }}; /* fully white on hover */
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+</style>
