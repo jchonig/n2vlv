@@ -3,7 +3,7 @@
     {% if site.github and site.github.repository and site.github.repository.created_at %}
       {% assign first_year = site.github.repository.created_at | date: "%Y" %}
     {% else %}
-      {% assign first_year = site.time | date: "%Y" %}
+      {% assign first_year = "2025" %}
     {% endif %}
     {% assign this_year = site.time | date: "%Y" %}
 
