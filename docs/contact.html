@@ -1,0 +1,89 @@
+---
+layout: default
+title: Jeffrey C Honig
+permalink: /contact.html
+---
+<style>
+ .markdown-list {
+     list-style: none;
+     padding-left: 0;
+     margin: 0;
+ }
+
+ .markdown-list li {
+     margin-bottom: 0.5em;
+     display: flex;
+     align-items: flex-start;
+     gap: 0.5em;
+ }
+
+ .markdown-list li strong {
+     flex-shrink: 0; /* ensures icon doesn’t wrap */
+ }
+
+ .markdown-list li a {
+     text-decoration: none;
+     color: inherit;
+ }
+
+ .markdown-list li a:hover {
+     text-decoration: underline;
+ }
+</style>
+
+<section class="content-section container" id="contacts">
+  <div class="container text-center mb-4">
+    <h2 class="mb-2">Contact Me</h2>
+  </div>
+
+  {% for contact in site.data.contacts %}
+  <div class="card card-forest mx-5 my-3 shadow-sm">
+    {% if contact.Title %}
+    <!-- Header toggles collapse -->
+    <div class="card-header card-forest
+		text-center fw-bold d-flex justify-content-between align-items-center"
+         data-bs-toggle="collapse"
+         data-bs-target="#collapse-{{ forloop.index }}"
+         aria-expanded="false"
+         aria-controls="collapse-{{ forloop.index }}"
+         style="cursor: pointer;">
+      <span>{{ contact.Title }}</span>
+      <i class="bi bi-caret-down-fill" id="caret-{{ forloop.index }}"></i>
+    </div>
+    {% endif %}
+
+    <div class="collapse" id="collapse-{{ forloop.index }}">
+      <div class="card-body text-body p-4"
+           {% if contact.Background %}
+           style="
+             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+                         url('{{ 'jch/images/' | relative_url }}{{ contact.Background }}');
+             background-size: cover;
+             background-position: center;
+           "
+           {% endif %}
+      >
+        {{ contact.Description | markdownify }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  {% for contact in site.data.contacts %}
+  var collapseEl{{ forloop.indnnnnnnnnex }} = document.getElementById('collapse-{{ forloop.index }}');
+  var caretEl{{ forloop.index }} = document.getElementById('caret-{{ forloop.index }}');
+
+  collapseEl{{ forloop.index }}.addEventListener('show.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-down-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-up-fill');
+  });
+  collapseEl{{ forloop.index }}.addEventListener('hide.bs.collapse', function () {
+    caretEl{{ forloop.index }}.classList.remove('bi-caret-up-fill');
+    caretEl{{ forloop.index }}.classList.add('bi-caret-down-fill');
+  });
+  {% endfor %}
+});
+</script>
