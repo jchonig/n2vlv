@@ -49,4 +49,4 @@ fi
 git diff-index --check --cached $against -- || exit 1
 
 # Update flickr previes
-$(dirname $0)/flickr_previews
+docker run -v ${PWD}/$(dirname $0):/git-hooks ghcr.io/astral-sh/uv:python3.14-alpine /usr/local/bin/uv run --with requests --with pyyaml python /git-hooks/flickr_previews

@@ -59,5 +59,6 @@ docs/fonts:
 clean:
 	-rm -rf docs/_site _dl
 	-rm -f ${DEPENDS}
+	-docker compose rm -f
 
 true: ;

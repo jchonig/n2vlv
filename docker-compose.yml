@@ -15,7 +15,7 @@ services:
           path: ./docker-compose.yaml
 
   watcher:
-    image: python:3-alpine
+    image: ghcr.io/astral-sh/uv:python3.14-alpine
     volumes:
       - ./docs:/src/site
       - ./build:/build:ro

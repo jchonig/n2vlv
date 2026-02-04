@@ -6,7 +6,7 @@
 ROOT_DIR="/src/site"
 
 # Path to Python pre-commit script
-FLICKR_SCRIPT="/git-hooks/flickr_previews"
+FLICKR_SCRIPT="/usr/local/bin/uv run --with requests --with pyyaml python /git-hooks/flickr_previews"
 
 # Directories to ignore
 IGNORE_DIRS="_site images/flickr-previews"
@@ -29,7 +29,7 @@ python3 -m pip install -q requests pyyaml --quiet
 
 echo "Starting inotify watcher on $ROOT_DIR (ignoring: $IGNORE_DIRS)..."
 
-"${FLICKR_SCRIPT}" -v --root-dir ${ROOT_DIR}
+${FLICKR_SCRIPT} -v --root-dir ${ROOT_DIR}
 
 # Infinite loop to restart watcher if it fails
 while true; do
@@ -42,7 +42,7 @@ while true; do
                 *.md|*.html|*.yml)
                     echo "[INFO] Detected change: $FILE"
                     # Run the Flickr preview script in verbose mode
-                    "${FLICKR_SCRIPT}" -v --root-dir ${ROOT_DIR}
+                    ${FLICKR_SCRIPT} -v --root-dir ${ROOT_DIR}
                     ;;
             esac
         done
