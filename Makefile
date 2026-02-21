@@ -3,12 +3,15 @@ BOOTSTRAP_ICONS_VERSION=1.13.1
 
 BOOTSTRAP_URL=https://github.com/twbs/bootstrap/releases/download/v${BOOTSTRAP_VERSION}/bootstrap-${BOOTSTRAP_VERSION}-dist.zip
 BOOTSTRAP_ICONS_URL=https://github.com/twbs/icons/releases/download/v${BOOTSTRAP_ICONS_VERSION}/bootstrap-icons-${BOOTSTRAP_ICONS_VERSION}.zip
+NET_CHECKIN_URL=https://raw.githubusercontent.com/jchonig/net-checkin/main/net_checkin.html
+
 DEPENDS= \
 	docs/js/bootstrap.bundle.min.js \
 	docs/js/bootstrap.bundle.min.js.map \
 	docs/css/bootstrap.min.css \
 	docs/css/bootstrap.min.css.map \
-	docs/fonts/bootstrap-icons.css
+	docs/fonts/bootstrap-icons.css \
+	docs/net_checkin.html
 
 # Update dependencies, build container and start local web site
 all: fetch
@@ -44,6 +47,9 @@ docs/fonts/bootstrap-icons.css: _dl/bootstrap-icons-${BOOTSTRAP_ICONS_VERSION}.z
 		unzip -j -q -o ../../_dl/bootstrap-icons-${BOOTSTRAP_ICONS_VERSION}.zip && \
 		mv *.svg *.woff* fonts
 
+docs/net_checkin.html:
+	curl -sSL ${NET_CHECKIN_URL} -o docs/net_checkin.html
+
 _dl:
 	mkdir _dl
 
@@ -60,5 +66,6 @@ clean:
 	-rm -rf docs/_site _dl
 	-rm -f ${DEPENDS}
 	-docker compose rm -f
+	-rm -f docs/net_checkin.html
 
 true: ;

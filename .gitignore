@@ -5,6 +5,7 @@
 .DS_Store
 _dl/
 docs/_site/
+docs/net-checkin.html
 _site/
 .sass-cache/
 .jekyll-cache/
