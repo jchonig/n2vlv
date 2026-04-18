@@ -41,6 +41,13 @@ while true; do
             case "$FILE" in
                 *.md|*.html|*.yml)
                     echo "[INFO] Detected change: $FILE"
+                    # Data file changes require a full Jekyll rebuild
+                    case "$FILE" in
+                        */_data/*)
+                            echo "[INFO] Data file changed, clearing _site for full rebuild"
+                            rm -rf "${ROOT_DIR}/_site"
+                            ;;
+                    esac
                     # Run the Flickr preview script in verbose mode
                     ${FLICKR_SCRIPT} -v --root-dir ${ROOT_DIR}
                     ;;
