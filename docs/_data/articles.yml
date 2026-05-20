@@ -78,3 +78,32 @@
     I have a [1959](https://flic.kr/s/aHsmWyrL7o){: .external-link-flickr} that I am restoring.
 
     ![Large version of Jeff's Favicon with an outline of a Volvo PV544](images/n2vlv.png){: width="75%" height="auto" }
+
+- Title: AllStarLink
+  Description: |
+    [AllStarLink](https://allstarlink.org){:target="_blank" rel="noopener"} is a VoIP-based network
+    that connects amateur radio repeaters and nodes around the world.  I use it to access repeaters
+    in areas where I don't have RF coverage (my basement office) —
+    allowing me to participate in nets and ragchews on distant repeaters from home or while traveling.
+
+    I have a hotspot running in my house so that I can carry a small
+    HT around and connect to AllStarLink nodes while I roam the house.
+
+    Then I set up an AllStarLink node for [W4ZBB (Playground Amateur
+    Radio Club)](https://w4zbb.org){:target="_blank" rel="noopener"}
+    to allow remote access to their repeater.  Now I can join in their
+    nets from back home in New York.
+
+    I gave the following presentation about AllStarLink at W4ZBB's club tech night and have also
+    given this presentation at the
+    [Tompkins County Amateur Radio Association](https://tcara-ny.org){:target="_blank" rel="noopener"}:
+
+    - [Introduction to AllStarLink](https://jchonig.github.io/pres-allstar/){:target="_blank" rel="noopener"} — an overview of what AllStarLink is and how it works
+
+    I later developed a presentation on setting up a
+    hotspot and other ways to access a repeater remotely.
+
+    - [AllStarLink Hotspot](https://jchonig.github.io/pres-allstar/hotspot.html){:target="_blank" rel="noopener"} — setting up a personal AllStarLink hotspot node
+
+    The slides and source for both presentations are available in my
+    [GitHub repository](https://github.com/jchonig/pres-allstar){:target="_blank" rel="noopener"}.
