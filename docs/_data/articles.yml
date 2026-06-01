@@ -107,3 +107,27 @@
 
     The slides and source for both presentations are available in my
     [GitHub repository](https://github.com/jchonig/pres-allstar){:target="_blank" rel="noopener"}.
+
+    I also wrote [YAAMon](#yaamon), a modern web application for monitoring and managing AllStarLink nodes.
+
+- Title: YAAMon
+  Description: |
+    [YAAMon (Yet Another AllStar MONitor)](https://github.com/jchonig/allstar-yaamon){:target="_blank" rel="noopener"}
+    is a modern, responsive web application for managing and monitoring
+    [AllStarLink](https://allstarlink.org){:target="_blank" rel="noopener"} nodes.
+    It replaces the PHP/Apache-based
+    [AllScan](https://github.com/davidgsd/AllScan){:target="_blank" rel="noopener"} and
+    [Allmon3](https://github.com/AllStarLink/Allmon3){:target="_blank" rel="noopener"}
+    with a single self-contained binary — no web server, no PHP runtime, and no external
+    database required. The interface works on desktops, tablets, and phones.
+
+    Key features:
+
+    - Single static binary with no external dependencies
+    - Built-in TLS with automatic Let's Encrypt certificates and HTTP/3 (QUIC)
+    - Docker and docker-compose ready
+    - Multi-user with role-based access (superuser / admin / readwrite / readonly)
+    - Live dashboard with SSE-pushed updates — no page refresh needed
+    - Passkey / WebAuthn (FIDO2) authentication support
+    - Manages multiple Asterisk/AMI nodes from one interface
+    - Encrypted backup and restore
