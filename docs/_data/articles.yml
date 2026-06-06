@@ -112,7 +112,7 @@
 
 - Title: YAAMon
   Description: |
-    [YAAMon (Yet Another AllStar MONitor)](https://github.com/jchonig/allstar-yaamon){:target="_blank" rel="noopener"}
+    [YAAMon (Yet Another AllStar MONitor)](https://yaamon.n2vlv.net){:target="_blank" rel="noopener"}
     is a modern, responsive web application for managing and monitoring
     [AllStarLink](https://allstarlink.org){:target="_blank" rel="noopener"} nodes.
     It replaces the PHP/Apache-based
