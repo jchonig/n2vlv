@@ -28,9 +28,13 @@ background: images/radios_bg.jpg
     <div class="collapse" id="collapse-{{ forloop.index }}">
       <div class="card-body text-body p-4"
            {% if radio.Background %}
+           {% if radio.Background contains '://' %}
+             {% assign bg = radio.Background %}
+           {% else %}
+             {% assign bg = 'images/' | append: radio.Background | relative_url %}
+           {% endif %}
            style="
-             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
-                         url('{{ 'jch/images/' | relative_url }}{{ radio.Background }}');
+             background-image: url('{{ bg }}');
              background-size: cover;
              background-position: center;
            "

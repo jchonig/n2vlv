@@ -55,9 +55,13 @@ permalink: /contact.html
     <div class="collapse" id="collapse-{{ forloop.index }}">
       <div class="card-body text-body p-4"
            {% if contact.Background %}
+           {% if contact.Background contains '://' %}
+             {% assign bg = contact.Background %}
+           {% else %}
+             {% assign bg = 'images/' | append: contact.Background | relative_url %}
+           {% endif %}
            style="
-             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
-                         url('{{ 'jch/images/' | relative_url }}{{ contact.Background }}');
+             background-image: url('{{ bg }}');
              background-size: cover;
              background-position: center;
            "
