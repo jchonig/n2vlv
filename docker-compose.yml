@@ -6,13 +6,14 @@ services:
     ports:
       - "4000:4000"
     container_name: n2vlv.net
-    command: jekyll serve --watch --drafts --incremental --host 0.0.0.0
+    # Clear incremental build state so every start is a full rebuild
+    command: sh -c "rm -rf _site .jekyll-metadata && exec jekyll serve --watch --drafts --incremental --host 0.0.0.0"
     develop:
       watch:
         - action: restart
           path: ./build
         - action: restart
-          path: ./docker-compose.yaml
+          path: ./docker-compose.yml
 
   watcher:
     image: ghcr.io/astral-sh/uv:python3.14-alpine
@@ -29,4 +30,4 @@ services:
         - action: restart
           path: ./git-hooks/
         - action: restart
-          path: ./docker-compose.yaml
+          path: ./docker-compose.yml
