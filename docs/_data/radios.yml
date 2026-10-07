@@ -78,9 +78,51 @@
 
     ![HT App on tablet](images/ht_tablet.jpg){: width="75%" height="auto" }
 
+- Title: VGC VR-N76
+  Background: index_header.jpg
+  Description: |
+    ## HT version of N7500
+
+    After playing with the VR-N7500 I wanted to try the HT version.
+    At the Cortland (NY) Hamfest in 2026 I found one for $85 with a
+    Signal Stick.
+
+    I later purchased a BHM-88 bluetooth hand mike which replicates
+    the full display of the N76.
+
+    This is currently my go-to HT.  It does dual watch; it is relatively
+    easy to program channels via the HT app and it does APRS in the
+    background w/o using one of the two dual watch slots.
+
+    There is a fantastic open source app for this radio called
+    [Handi-Talky
+    Commander](https://ylianst.github.io/HTCommanderSite/) that I have
+    been watching.
+
 - Title: Quansheng UV-K6
   Description: |
-    TBD
+    ## My first HT
+
+    A nice little HT whose claim to fame is support for open source
+    firmware.  I've been running
+    [F4HWN](https://github.com/armel/uv-k5-firmware-custom)
+    firmware on this which adds lots of cool features.
+
+- Title: Quansheng UV-K1
+  Description: |
+    ## Follow-on to UV-K1
+
+    The follow-on to the UV-K5.  The UV-K1 (Mini Kong) has an updated
+    processor with more memory.  I ordered one during Prime Days in
+    October 2026.  This is supported by a new branch of
+    [F4HWN](https://github.com/armel/uv-k5-firmware-custom).
+
+    The additional memory lets you have all the features of the UV-K1
+    firmware in one image.  Previously you had to select which
+    features you wanted because of the memory limitations.
+
+    There is also an option to install a bootloader that lets you
+    select from one of several images at power-on time.
 
 - Title: Baufeng UV-5R Mini
   Description: |
@@ -132,3 +174,19 @@
 - Title: DigiRig Mobile
   Description: |
     TBD
+
+- Title: Hallicrafters S-107
+  Background: https://live.staticflickr.com/65535/55564492390_85874f7dbd_b.jpg
+  Description: |
+    # My introduction to the hobby
+
+    This radio was given to me in the early 1970s by family friends.
+    It was my introduction to Ham radio.
+
+    I recently found it tucked away in a dark corner of our store
+    room.  Quite dusty, a bit rusty.
+
+    I haven't decided if I want to restore it.  I've been reading and
+    probably need to replace all the caps.  I also remember playing
+    with the tuning of the inductors when I was a teen, I'm sure it's
+    way out of tune.
