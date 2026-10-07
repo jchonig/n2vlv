@@ -178,7 +178,7 @@
 - Title: Hallicrafters S-107
   Background: https://live.staticflickr.com/65535/55564492390_85874f7dbd_b.jpg
   Description: |
-    # My introduction to the hobby
+    ## My introduction to the hobby
 
     This radio was given to me in the early 1970s by family friends.
     It was my introduction to Ham radio.
@@ -190,3 +190,18 @@
     probably need to replace all the caps.  I also remember playing
     with the tuning of the inductors when I was a teen, I'm sure it's
     way out of tune.
+
+- Title: HF Signals sBitx v3
+  Background: https://live.staticflickr.com/65535/55449740505_425951b624_b.jpg
+  Description: |
+    ## My first HF radio
+    The [sBitx](https://www.hfsignals.com/index.php/sbitx-v3/) is a
+    Raspberry Pi 4 based SDR transceiver putting out about 25W.  Since
+    it is Linux based it can run additional apps, such as HamDash,
+    right on the radio.
+
+    I'm running alternate firmware by
+    [vroOoms](https://github.com/vroOoms/sbitx-vu3exh) which adds
+    allot of featurews, including auto SWR checks.
+
+    My goal for this is to do FT8 and other digital modes.
