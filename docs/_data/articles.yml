@@ -138,3 +138,26 @@
     - Passkey / WebAuthn (FIDO2) authentication support
     - Manages multiple Asterisk/AMI nodes from one interface
     - Encrypted backup and restore
+
+- Title: GPS Station
+  Description: |
+    [GPS Station](https://github.com/jchonig/bitx-gps-station){:target="_blank" rel="noopener"}
+    sets the clock and the grid square from a GPS on an
+    [sBitx or zBitx](radios.html), running either the original sbitx
+    software or the refactored zbitxre, and keeps the ham programs
+    running on its desktop on the same grid square.
+
+    Key features:
+
+    - Adds the GPS to ntpsec as a time source, so the clock stays right
+      in the field; with the network up, internet servers outvote it
+    - Measures how late the GPS's NMEA time arrives and calibrates for it
+      once, against network time
+    - Sets the 6-character Maidenhead grid on the radio, waiting a minute
+      so a fix wandering along a grid line doesn't flip it back and forth
+    - A tray icon showing the fix, the time source, and a sky map of the
+      satellites
+    - Keeps WSJT-X and JS8Call on the GPS grid, and flags JTDX, fldigi
+      and QSSTV when theirs differs
+    - Installs from a signed apt repository at
+      [gps-station.n2vlv.net](https://gps-station.n2vlv.net/){:target="_blank" rel="noopener"}
